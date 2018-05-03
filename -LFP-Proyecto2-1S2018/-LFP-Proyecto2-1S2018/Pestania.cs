@@ -18,9 +18,9 @@ namespace _LFP_Proyecto2_1S2018
         string rutaTablaDeSimbolos = " ";
         string rutaTablaDeErrores = "";
 
-        public List<lexema> tablaDeSimbolos = new List<lexema>();
-        public List<error> tablaDeErrores = new List<error>();
-        public List<variable> valorVariable = new List<variable>();
+        public List<Lexema> tablaDeSimbolos = new List<Lexema>();
+        public List<Error> tablaDeErrores = new List<Error>();
+        public List<Variable> valorVariable = new List<Variable>();
 
         public Pestania(TabControl Control)
         {
