@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,21 @@ namespace _LFP_Proyecto2_1S2018
         {
 
         }
+        public Pestania nuevaPestania()
+        {
+            int NewTabCount = Contenedor.TabCount;
+            Pestania NewTab;
+            NewTab = new Pestania(this.Contenedor);
+            NewTab.Name = "Nuevo proyecto " + NewTabCount;
+            NewTab.Padding = new System.Windows.Forms.Padding(3);
+            NewTab.TabIndex = NewTabCount;
+            NewTab.Text = "Nuevo proyecto " + NewTabCount;
+            NewTab.UseVisualStyleBackColor = true;
+            Contenedor.Controls.Add(NewTab);
+            Contenedor.SelectedIndex = NewTab.TabIndex;
 
+            return NewTab;
+        }
         //----  FUNCION COMPARAR
 
         private Boolean comparar(string[] matrizDeCaracteres, string caracter)
@@ -131,6 +146,11 @@ namespace _LFP_Proyecto2_1S2018
                             lexema += caracterActual;
                             estadoActual = 7;
                         }
+                        else if (comparar(CN, caracterActualStr))
+                        {
+                            lexema += caracterActual;
+                            estadoActual = 14;
+                        }
                         else
                         {
                             switch (caracterActual)
@@ -177,7 +197,7 @@ namespace _LFP_Proyecto2_1S2018
                         }
                         else
                         {
-                            validarLexema(lexema, fila, columna, "id");
+                            validarLexema(lexema, fila, columna, "reservado");
                             estadoActual = 0;
                             lexema = "";
                             estadoInicial--;
@@ -222,7 +242,7 @@ namespace _LFP_Proyecto2_1S2018
                         }
                         else
                         {
-                            validarLexema(lexema, fila, columna, "id");
+                            validarLexema(lexema, fila, columna, "reservado");
                             estadoActual = 0;
                             lexema = "";
                             estadoInicial--;
@@ -258,7 +278,7 @@ namespace _LFP_Proyecto2_1S2018
                         }
                         break;
                     case 6:     //-----  ESTADO 6   -----
-                        validarLexema(lexema, fila, columna, "signo");
+                        validarLexema(lexema, fila, columna, "reservado");
                         estadoActual = 0;
                         lexema = "";
                         estadoInicial--;
@@ -272,7 +292,7 @@ namespace _LFP_Proyecto2_1S2018
                         }
                         else
                         {
-                            validarLexema(lexema, fila, columna, "signo");
+                            validarLexema(lexema, fila, columna, "reservado");
                             estadoActual = 0;
                             lexema = "";
                             estadoInicial--;
@@ -326,6 +346,25 @@ namespace _LFP_Proyecto2_1S2018
                         estadoInicial--;
                         colActual--;
                         break;
+                    case 14:     //-----  ESTADO 14   -----
+                        if (comparar(CN, caracterActualStr))
+                        {
+                            estadoActual = 15;
+                            lexema += caracterActual;
+                        }
+                        else
+                        {
+                            estadoActual = 14;
+                            lexema += caracterActual;
+                        }
+                        break;
+                    case 15:     //-----  ESTADO 15   -----
+                        validarLexema(lexema, fila, columna, "comentario");
+                        estadoActual = 0;
+                        lexema = "";
+                        estadoInicial--;
+                        colActual--;
+                        break;
                     default:
                         agregarError(lexema, fila, columna);
                         estadoInicial--;
@@ -337,7 +376,280 @@ namespace _LFP_Proyecto2_1S2018
             }
         }
 
+
+        string[,] token = new string[,] {
+                { "ID", "Token", "Descripcion" },
+                { "1", "Numero", "Secuencia de numeros" },
+                { "2", "id", "Cadena de numeros y letras" },
+                { "3", "diseño", "Palabra reservada, inicio de programa" },
+                { "4", "variables", "Palabra reservda, indica seccion de variables" },
+                { "5", "construccion", "Palabra reservada, indica seccion de construccion" },
+                { "6", "nombre", "Palabra reservada" },
+                { "7", "tipo", "Palabra reservada" },
+                { "8", "valor", "Palabra reservada" },
+                { "9", "terreno", "Palabra reservada" },
+                { "10", "pared", "Palabra reservada" },
+                { "11", "ventana", "Palabra reservada" },
+                { "12", "puerta", "Palabra reservada" },
+                { "13", "suelo", "Palabra reservada" },
+                { "14", "ancho", "Palabra reservada" },
+                { "15", "largo", "Palabra reservada" },
+                { "16", "color", "Palabra reservada" },
+                { "17", "alto", "Palabra reservada" },
+                { "18", "inicio", "Palabra reservada"},
+                { "19", "fin", "Palabra reservada"},
+                { "20", "radio", "Palabra reservada"},
+                { "21", "pared_asociada", "Palabra reservada"},
+                { "22", "Operador", "Operador matematico"},
+                { "23", ";", "Final de comando"},
+                { "24", "<", "Signo menor"},
+                { "25", ">", "Signo mayor"},
+                { "26", ",", "Coma"},
+                { "27", "=", "Signo igual, asignacion"},
+                { "27", ":", "Dos puntos"}
+            };
+
+        string[,] palabrasReservadas = new string[,] {
+                { "3", "diseño" },
+                { "4", "variables" },
+                { "5", "construccion" },
+                { "6", "nombre" },
+                { "7", "tipo" },
+                { "8", "valor" },
+                { "9", "terreno" },
+                { "10", "pared" },
+                { "11", "ventana" },
+                { "12", "puerta" },
+                { "13", "suelo" },
+                { "14", "ancho" },
+                { "15", "largo" },
+                { "16", "color" },
+                { "17", "alto" },
+                { "18", "inicio"},
+                { "19", "fin"},
+                { "20", "radio"},
+                { "21", "pared_asociada"},
+                { "22", "Operador"},
+                { "23", ";"},
+                { "24", "<"},
+                { "25", ">"},
+                { "26", ","},
+                { "27", "="},
+                { "27", ":"}
+            };
+        List<variable> valorVariable = new List<variable>();
+        List<lexema> tablaDeSimbolos = new List<lexema>();
+        List<error> tablaDeErrores = new List<error>();
+        int num = 1;
+        int numError = 1;
+
+        private void agregarLexema(string idToken, string lexema, int fila, int columna, string token)
+        {
+            tablaDeSimbolos.Add(new lexema() { id = num, idToken = idToken, nombre = lexema, fila = fila, columna = columna, token = token });
+            num++;
+        }
+        private void agregarError(string caracter, int fila, int columna)
+        {
+            tablaDeErrores.Add(new error() { id = numError, caracter = caracter, fila = fila, columna = columna });
+            numError++;
+        }
+
+        private void agregarVariable(string nombre, int valor)
+        {
+            variable var = valorVariable.Find(x => x.nombre.Contains(nombre));
+            if (var == null)
+            {
+                valorVariable.Add(new variable() { id = num, nombre = nombre, valor = valor });
+                //escribirEnConsola("Se asigna la variable: " + nombre + ": " + valor);
+            }
+            else
+            {
+                var.valor = valor;
+                //escribirEnConsola("Se asigna la variable: " + nombre + ": " + valor);
+            }
+
+            num++;
+
+        }
+
+        private string obrenerVariable(string nombre)
+        {
+
+            variable var = valorVariable.Find(x => x.nombre.Contains(nombre));
+            if (var == null)
+            {
+                return nombre;
+            }
+            else
+            {
+                return Convert.ToString(var.valor);
+            }
+
+        }
+        //******************************************************************************************************
+
+        private string validarLexema(string lexema, int fila, int columna, string tipo)
+        {
+
+
+
+            // tokens y palabras reservadas
+
+
+            if (tipo == "numero")   //  Si viene un numero:
+            {
+                lexema = lexema.Replace(" ", "");
+                agregarLexema(token[1, 0], lexema, fila, columna, token[1, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[1, 0] + "\tToken: " + token[1, 2];
+
+            }
+            else if (tipo == "reservado")   //   Si vienen ID o simbolos:
+            {
+                lexema = lexema.Replace(" ", "");
+                for (int i = 0; i < palabrasReservadas.GetLength(0); i++)
+                {
+                    if (lexema == palabrasReservadas[i, 1])
+                    {
+                        int id = Int32.Parse(palabrasReservadas[i, 0]);
+                        agregarLexema(token[id, 0], lexema, fila, columna, token[id, 2]);
+                        return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[id, 0] + "\tToken: " + token[id, 2];
+
+                    }
+                }
+                agregarLexema(token[2, 0], lexema, fila, columna, token[2, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[2, 0] + "\tToken: " + token[2, 2];
+
+            }
+            else if (tipo == "comentario")   //  Si viene un comentario:
+            {
+                agregarLexema(token[2, 0], lexema, fila, columna, token[2, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[2, 0] + "\tToken: " + token[2, 2];
+
+            }
+
+            return "ERROR INESPERADO...";
+        }
+
+        private void Entrada_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        string rutaArchivo = null;
+        public string guardarComo(string texto)
+        {
+            SaveFileDialog saveFileDialog1;
+            saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Title = "Guardar proyecto de Design";
+            saveFileDialog1.Filter = "Archivo de Design (.design) |*.design";
+
+            saveFileDialog1.DefaultExt = "design";
+            saveFileDialog1.AddExtension = true;
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.InitialDirectory = @"H:\LO DEL ESCRITORIO";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                rutaArchivo = saveFileDialog1.FileName;
+
+                StreamWriter fichero = new StreamWriter(rutaArchivo);
+                fichero.Write(texto);
+                fichero.Close();
+                this.Text = "Design " + rutaArchivo;
+                guardarToolStripMenuItem.Text = "Guardar: " + rutaArchivo;
+                return rutaArchivo;
+            }
+            else
+            {
+                saveFileDialog1.Dispose();
+                saveFileDialog1 = null;
+                return null;
+            }
+
+        }
+
+        private void guardarComoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Pestania selectTab = Contenedor.SelectedTab as Pestania;
+            string texto = selectTab.Entrada.Text;
+            guardarComo(texto);
+        }
+
+        private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Pestania selectTab = Contenedor.SelectedTab as Pestania;
+            string texto = selectTab.Entrada.Text;
+            if (selectTab.rutaArchivo == null)
+            {
+                selectTab.rutaArchivo = guardarComo(texto);
+            }
+            else
+            {
+                StreamWriter fichero = new StreamWriter(selectTab.rutaArchivo);
+                fichero.WriteLine(texto);
+                fichero.Close();
+            }
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog oFD = new OpenFileDialog();
+            oFD.Title = "Abrir proyecto de Design";
+            oFD.Filter = "Proyecto de Design (*.design)|*.design" +
+            "|Todos los archivos (*.*)|*.*";
+
+            if (oFD.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Pestania NewTab = nuevaPestania();
+                NewTab.rutaArchivo = oFD.FileName;
+                NewTab.Entrada.Text = System.IO.File.ReadAllText(NewTab.rutaArchivo);
+
+                NewTab.Text = oFD.SafeFileName;
+            }
+        }
+
+        private void Contenedor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            nuevaPestania();
+        }
     }
 
+
+}
+
+
+public class lexema
+{
+    public int id { get; set; }
+    public string idToken { get; set; }
+    public string nombre { get; set; }
+    public int fila { get; set; }
+    public int columna { get; set; }
+    public string token { get; set; }
+}
+
+public class variable
+{
+    public int id { get; set; }
+    public string nombre { get; set; }
+    public int valor { get; set; }
+}
+
+
+public class error
+{
+    public int id { get; set; }
+    public int fila { get; set; }
+    public int columna { get; set; }
+    public string caracter { get; set; }
 
 }
