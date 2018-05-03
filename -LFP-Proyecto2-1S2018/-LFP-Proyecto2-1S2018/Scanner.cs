@@ -14,6 +14,7 @@ namespace _LFP_Proyecto2_1S2018
         {
             this.Proyecto = Proyecto;
         }
+
         private Boolean comparar(string[] matrizDeCaracteres, string caracter)
         {
             string caracterStr = caracter.ToString();
@@ -463,13 +464,10 @@ namespace _LFP_Proyecto2_1S2018
             }
 
         }
-        //******************************************************************************************************
 
         private string validarLexema(string lexema, int fila, int columna, string tipo)
         {
-
             // tokens y palabras reservadas
-
             if (tipo == "numero")   //  Si viene un numero:
             {
                 lexema = lexema.Replace(" ", "");
@@ -500,7 +498,6 @@ namespace _LFP_Proyecto2_1S2018
                 return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[2, 0] + "\tToken: " + token[2, 2];
 
             }
-
             return "ERROR INESPERADO...";
         }
 
