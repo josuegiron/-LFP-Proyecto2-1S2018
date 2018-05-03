@@ -70,7 +70,7 @@ namespace _LFP_Proyecto2_1S2018
             string[] M = { ">" };
             string[] C = { "," };
             string[] GB = { "_" };
-            string[] O = { " ", "+", "-", "*", "/", "^" };
+            string[] O = { "+", "-", "*", "/", "^" };
             string[] SL = { "\n" };
             string[] D = { "/" };
             string[] G = { "-" };
@@ -181,7 +181,6 @@ namespace _LFP_Proyecto2_1S2018
                     case 1:     //-----  ESTADO 1   -----
                         if (comparar(L, caracterActualStr))
                         {
-
                             estadoActual = 1;
                             lexema += caracterActual;
                         }
@@ -437,35 +436,36 @@ namespace _LFP_Proyecto2_1S2018
                 { "27", "="},
                 { "27", ":"}
             };
-        List<variable> valorVariable = new List<variable>();
-        List<lexema> tablaDeSimbolos = new List<lexema>();
-        List<error> tablaDeErrores = new List<error>();
+        
+        
         int num = 1;
         int numError = 1;
 
         private void agregarLexema(string idToken, string lexema, int fila, int columna, string token)
         {
-            tablaDeSimbolos.Add(new lexema() { id = num, idToken = idToken, nombre = lexema, fila = fila, columna = columna, token = token });
+            Pestania selectTab = Contenedor.SelectedTab as Pestania;
+            selectTab.tablaDeSimbolos.Add(new lexema() { id = num, idToken = idToken, nombre = lexema, fila = fila, columna = columna, token = token });
             num++;
         }
         private void agregarError(string caracter, int fila, int columna)
         {
-            tablaDeErrores.Add(new error() { id = numError, caracter = caracter, fila = fila, columna = columna });
+            Pestania selectTab = Contenedor.SelectedTab as Pestania;
+            selectTab.tablaDeErrores.Add(new error() { id = numError, caracter = caracter, fila = fila, columna = columna });
             numError++;
         }
 
         private void agregarVariable(string nombre, int valor)
         {
-            variable var = valorVariable.Find(x => x.nombre.Contains(nombre));
+            Pestania selectTab = Contenedor.SelectedTab as Pestania;
+            variable var = selectTab.valorVariable.Find(x => x.nombre.Contains(nombre));
             if (var == null)
             {
-                valorVariable.Add(new variable() { id = num, nombre = nombre, valor = valor });
-                //escribirEnConsola("Se asigna la variable: " + nombre + ": " + valor);
+               
+                selectTab.valorVariable.Add(new variable() { id = num, nombre = nombre, valor = valor });
             }
             else
             {
                 var.valor = valor;
-                //escribirEnConsola("Se asigna la variable: " + nombre + ": " + valor);
             }
 
             num++;
@@ -474,8 +474,8 @@ namespace _LFP_Proyecto2_1S2018
 
         private string obrenerVariable(string nombre)
         {
-
-            variable var = valorVariable.Find(x => x.nombre.Contains(nombre));
+            Pestania selectTab = Contenedor.SelectedTab as Pestania;
+            variable var = selectTab.valorVariable.Find(x => x.nombre.Contains(nombre));
             if (var == null)
             {
                 return nombre;
@@ -491,10 +491,7 @@ namespace _LFP_Proyecto2_1S2018
         private string validarLexema(string lexema, int fila, int columna, string tipo)
         {
 
-
-
             // tokens y palabras reservadas
-
 
             if (tipo == "numero")   //  Si viene un numero:
             {
@@ -620,6 +617,36 @@ namespace _LFP_Proyecto2_1S2018
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             nuevaPestania();
+        }
+
+        public void Compilar(Pestania selectTab)
+        {
+            selectTab.tablaDeSimbolos.Clear();
+            selectTab.tablaDeErrores.Clear();
+            string cadena = selectTab.Entrada.Text + "\n";
+            analizarLenguaje(cadena);
+            
+        }
+
+        Pestania tabActual;
+        private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            num = 1;
+            numError = 1;
+            tabActual = Contenedor.SelectedTab as Pestania;
+            Compilar(tabActual);
+        }
+
+        private void erroresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabActual = Contenedor.SelectedTab as Pestania;
+            tabActual.generarTablaDeErrores();
+        }
+
+        private void tokensToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabActual = Contenedor.SelectedTab as Pestania;
+            tabActual.generarTablaDeSimbolos();
         }
     }
 

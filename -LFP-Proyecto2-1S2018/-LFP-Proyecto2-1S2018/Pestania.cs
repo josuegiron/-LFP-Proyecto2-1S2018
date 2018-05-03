@@ -20,6 +20,7 @@ namespace _LFP_Proyecto2_1S2018
 
         public List<lexema> tablaDeSimbolos = new List<lexema>();
         public List<error> tablaDeErrores = new List<error>();
+        public List<variable> valorVariable = new List<variable>();
 
         public Pestania(TabControl Control)
         {

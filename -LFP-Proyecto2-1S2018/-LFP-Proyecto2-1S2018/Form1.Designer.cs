@@ -44,8 +44,8 @@
             this.manualDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualTecnicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Contenedor = new System.Windows.Forms.TabControl();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.Contenedor = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,6 +125,7 @@
             this.compilarToolStripMenuItem.Name = "compilarToolStripMenuItem";
             this.compilarToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.compilarToolStripMenuItem.Text = "Compilar";
+            this.compilarToolStripMenuItem.Click += new System.EventHandler(this.compilarToolStripMenuItem_Click);
             // 
             // mostrarDiseñoToolStripMenuItem
             // 
@@ -137,12 +138,14 @@
             this.erroresToolStripMenuItem.Name = "erroresToolStripMenuItem";
             this.erroresToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.erroresToolStripMenuItem.Text = "Errores";
+            this.erroresToolStripMenuItem.Click += new System.EventHandler(this.erroresToolStripMenuItem_Click);
             // 
             // tokensToolStripMenuItem
             // 
             this.tokensToolStripMenuItem.Name = "tokensToolStripMenuItem";
             this.tokensToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.tokensToolStripMenuItem.Text = "Tokens";
+            this.tokensToolStripMenuItem.Click += new System.EventHandler(this.tokensToolStripMenuItem_Click);
             // 
             // ayudaToolStripMenuItem
             // 
@@ -172,6 +175,12 @@
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(23, 20);
+            this.toolStripMenuItem1.Text = "";
+            // 
             // Contenedor
             // 
             this.Contenedor.Location = new System.Drawing.Point(12, 27);
@@ -181,12 +190,6 @@
             this.Contenedor.TabIndex = 3;
             this.Contenedor.Tag = "";
             this.Contenedor.SelectedIndexChanged += new System.EventHandler(this.Contenedor_SelectedIndexChanged);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(23, 20);
-            this.toolStripMenuItem1.Text = "";
             // 
             // Form1
             // 
