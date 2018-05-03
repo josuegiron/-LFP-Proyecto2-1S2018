@@ -537,31 +537,31 @@ namespace _LFP_Proyecto2_1S2018
         string rutaArchivo = null;
         public string guardarComo(string texto)
         {
-            SaveFileDialog saveFileDialog1;
-            saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Title = "Guardar proyecto de Design";
-            saveFileDialog1.Filter = "Archivo de Design (.design) |*.design";
+            Pestania selectTab = Contenedor.SelectedTab as Pestania;
 
-            saveFileDialog1.DefaultExt = "design";
-            saveFileDialog1.AddExtension = true;
-            saveFileDialog1.RestoreDirectory = true;
-            saveFileDialog1.InitialDirectory = @"H:\LO DEL ESCRITORIO";
+            SaveFileDialog sFD = new SaveFileDialog();
+            sFD.Title = "Guardar proyecto Design " + selectTab.Text;
+            sFD.Filter = "Cualquier proyecto Design(*.design*) |*.design";
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            sFD.DefaultExt = "design";
+            sFD.AddExtension = true;
+            sFD.RestoreDirectory = true;
+            sFD.InitialDirectory = @"H:\LO DEL ESCRITORIO";
+
+            if (sFD.ShowDialog() == DialogResult.OK)
             {
-                rutaArchivo = saveFileDialog1.FileName;
+                selectTab.rutaArchivo = sFD.FileName;
 
-                StreamWriter fichero = new StreamWriter(rutaArchivo);
+                StreamWriter fichero = new StreamWriter(selectTab.rutaArchivo);
                 fichero.Write(texto);
                 fichero.Close();
-                this.Text = "Design " + rutaArchivo;
-                guardarToolStripMenuItem.Text = "Guardar: " + rutaArchivo;
-                return rutaArchivo;
+                selectTab.Text = sFD.FileName.Substring(sFD.FileName.LastIndexOf("\\") + 1);
+                return selectTab.rutaArchivo;
             }
             else
             {
-                saveFileDialog1.Dispose();
-                saveFileDialog1 = null;
+                sFD.Dispose();
+                sFD = null;
                 return null;
             }
 
