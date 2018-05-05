@@ -45,7 +45,8 @@ namespace _LFP_Proyecto2_1S2018
                 { "28", ":", "Dos puntos"},
                 { "29", "/", "Operador de division o indicador de cierre de estiqueta..."},
                 { "30", "Comentario", "Comentarios"},
-                { "31", "Cadena", "Cadena"}
+                { "31", "Cadena", "Cadena"},
+                { "32", "Longitud", "Palabra reservada"}
             };
 
         public string[,] palabrasReservadas = new string[,] {
@@ -75,7 +76,8 @@ namespace _LFP_Proyecto2_1S2018
                 { "26", ","},
                 { "27", "="},
                 { "28", ":"},
-                { "29", "/"}
+                { "29", "/"},
+                { "32", "longitud"}
             };
 
 
@@ -102,7 +104,7 @@ namespace _LFP_Proyecto2_1S2018
 
             this.Entrada.Location = new System.Drawing.Point(6, 20);
             this.Entrada.Name = "Entrada";
-            this.Entrada.Size = new System.Drawing.Size(350, 500);
+            this.Entrada.Size = new System.Drawing.Size(350, 450);
             this.Entrada.TabIndex = 0;
             this.Entrada.Text = "";
 
@@ -117,14 +119,14 @@ namespace _LFP_Proyecto2_1S2018
             this.Consola.BackColor = System.Drawing.SystemColors.MenuText;
             this.Consola.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Consola.ForeColor = System.Drawing.Color.White;
-            this.Consola.Location = new System.Drawing.Point(6, 540);
+            this.Consola.Location = new System.Drawing.Point(6, 490);
             this.Consola.Margin = new System.Windows.Forms.Padding(5);
             this.Consola.Multiline = true;
             this.Consola.Name = "Consola";
-            this.Consola.Size = new System.Drawing.Size(350, 80);
+            this.Consola.Size = new System.Drawing.Size(350, 130);
             this.Consola.TabIndex = 0;
             this.Consola.TabStop = false;
-
+            this.Consola.Text = " DESIGN# ";
             this.Controls.Add(this.Consola);
             this.Controls.Add(this.Entrada);
             // 
@@ -180,7 +182,7 @@ namespace _LFP_Proyecto2_1S2018
 
         public void EscribirEnConsola(string texto)
         {
-            Consola.Text += texto + "\r\n KTurtle# ";
+            Consola.Text += texto + "\r\n DESIGN# ";
 
             Consola.SelectionStart = Consola.Text.Length;
             Consola.Focus();

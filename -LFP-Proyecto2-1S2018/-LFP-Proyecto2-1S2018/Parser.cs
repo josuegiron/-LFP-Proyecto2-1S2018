@@ -57,14 +57,11 @@ namespace _LFP_Proyecto2_1S2018
                 }
             }
             catch { return false; }
-            
-
-            
         }
         
 
 
-        public void Inicio()
+        public void Design()
         {
             if (CompararLexema("24"))
             {
@@ -73,7 +70,7 @@ namespace _LFP_Proyecto2_1S2018
                     if (CompararLexema("25"))
                     {
                         Variables();
-                        //Construccion();
+                        Construccion();
                         if (CompararLexema("24"))
                         {
                             if (CompararLexema("29"))
@@ -86,38 +83,39 @@ namespace _LFP_Proyecto2_1S2018
                                     }
                                     else
                                     {
-                                        Proyecto.EscribirEnConsola("Error: Falta cierre de etiqueta");
+                                        Error("25");
                                     }
                                 }
                                 else
                                 {
-                                    Proyecto.EscribirEnConsola("Error: Falta diseño cierre de etiqueta");
+                                    Error("3");
                                 }
                             }
                             else
                             {
-                                Proyecto.EscribirEnConsola("Error: Falta indicador cierre de etiqueta '/' ");
+                                Error("29");
                             }
                         }
                         else
                         {
-                            Proyecto.EscribirEnConsola("Error: Falta apertura de etiqueta");
+                            Error("24");
                         }
                     }
                     else
                     {
-                        Proyecto.EscribirEnConsola("Error: Falta apertura de etiqueta");
+                        Error("25");
                     }
                 }
                 else
                 {
-                    Proyecto.EscribirEnConsola("Error: Falta diseño cierre de etiqueta");
+                    Error("3");
                 }
             }
             else
             {
-                Proyecto.EscribirEnConsola("Error: Falta cierre de etiqueta");
+                Error("24");
             }
+
         }
 
         private void Variables()
@@ -137,41 +135,41 @@ namespace _LFP_Proyecto2_1S2018
                                 {
                                     if (CompararLexema("25"))
                                     {
-                                        Proyecto.EscribirEnConsola("Se complila correctamente el diseño...");
+                                        ///******************************************************************
                                     }
                                     else
                                     {
-                                        Proyecto.EscribirEnConsola("Error: Falta cierre de etiqueta '>'");
+                                        Error("25");
                                     }
                                 }
                                 else
                                 {
-                                    Proyecto.EscribirEnConsola("Error: Falta palabra reservada 'variable'");
+                                    Error("4");
                                 }
                             }
                             else
                             {
-                                Proyecto.EscribirEnConsola("Error: Falta indicador cierre de etiqueta");
+                                Error("29");
                             }
                         }
                         else
                         {
-                            Proyecto.EscribirEnConsola("Error: Falta apertura de etiqueta");
+                            Error("24");
                         }
                     }
                     else
                     {
-                        Proyecto.EscribirEnConsola("Error: Falta apertura de etiqueta");
+                        Error("25");
                     }
                 }
                 else
                 {
-                    Proyecto.EscribirEnConsola("Error: Falta variable");
+                    Error("4");
                 }
             }
             else
             {
-                Proyecto.EscribirEnConsola("Error: Falta cierre de etiqueta");
+                Error("24");
             }
         }
 
@@ -295,9 +293,672 @@ namespace _LFP_Proyecto2_1S2018
                 OtraVariable();
             }
         }
+        private void Construccion()
+        {
+            if (CompararLexema("24"))
+            {
+                if (CompararLexema("5"))
+                {
+                    if (CompararLexema("25"))
+                    {
+                        Terreno();
+                        Pared_s();
+                        Ventana_s();
+                        Puerta_s();
+                        Suelo();
+                        if (CompararLexema("24"))
+                        {
+                            if (CompararLexema("29"))
+                            {
+                                if (CompararLexema("5"))
+                                {
+                                    if (CompararLexema("25"))
+                                    {
+                                        ///******************************************************************
+                                    }
+                                    else
+                                    {
+                                        Error("25");
+                                    }
+                                }
+                                else
+                                {
+                                    Error("5");
+                                }
+                            }
+                            else
+                            {
+                                Error("29");
+                            }
+                        }
+                        else
+                        {
+                            Error("24");
+                        }
+                    }
+                    else
+                    {
+                        Error("25");
+                    }
+                }
+                else
+                {
+                    Error("5");
+                }
+            }
+            else
+            {
+                Error("24");
+            }
+        }
+
+        private void Terreno()
+        {
+            if (CompararLexema("24"))
+            {
+                if (CompararLexema("9"))
+                {
+                    if (CompararLexema("25"))
+                    {
+                        Ancho();
+                        Largo();
+                        if (CompararLexema("24"))
+                        {
+                            if (CompararLexema("29"))
+                            {
+                                if (CompararLexema("9"))
+                                {
+                                    if (CompararLexema("25"))
+                                    {
+                                        ///******************************************************************
+                                    }
+                                    else
+                                    {
+                                        Error("25");
+                                    }
+                                }
+                                else
+                                {
+                                    Error("9");
+                                }
+                            }
+                            else
+                            {
+                                Error("29");
+                            }
+                        }
+                        else
+                        {
+                            Error("24");
+                        }
+                    }
+                    else
+                    {
+                        Error("25");
+                    }
+                }
+                else
+                {
+                    Error("9");
+                }
+            }
+            else
+            {
+                Error("24");
+
+            }
+        }
+        private void Ancho()
+        {
+            if (CompararLexema("14"))
+            {
+                if (CompararLexema("27"))
+                {
+                    if (CompararLexema("1"))
+                    {
+
+                    }
+                    else
+                    {
+                        Error("1");
+                    }
+                }
+                else
+                {
+                    Error("27");
+                }
+            }
+            else
+            {
+                Error("14");
+            }
+        }
+        private void Largo()
+        {
+            if (CompararLexema("15"))
+            {
+                if (CompararLexema("27"))
+                {
+                    if (CompararLexema("1"))
+                    {
+
+                    }
+                    else
+                    {
+                        Error("1");
+                    }
+                }
+                else
+                {
+                    Error("27");
+                }
+            }
+            else
+            {
+                Error("15");
+            }
+        }
+
+        private void Pared_s()
+        {
+            if (CompararLexema("24"))
+            {
+                if (CompararLexema("10"))
+                {
+                    if (CompararLexema("25"))
+                    {
+                        Pared();
+                        OtraPared();
+                        if (CompararLexema("24"))
+                        {
+                            if (CompararLexema("29"))
+                            {
+                                if (CompararLexema("10"))
+                                {
+                                    if (CompararLexema("25"))
+                                    {
+                                        ///******************************************************************
+                                    }
+                                    else
+                                    {
+                                        Error("25");
+                                    }
+                                }
+                                else
+                                {
+                                    Error("10");
+                                }
+                            }
+                            else
+                            {
+                                Error("29");
+                            }
+                        }
+                        else
+                        {
+                            Error("24");
+                        }
+                    }
+                    else
+                    {
+                        Error("25");
+                    }
+                }
+                else
+                {
+                    Error("10");
+                }
+            }
+            else
+            {
+                Error("24");
+
+            }
+        }
+        private void Pared()
+        {
+            Nombre();
+            Color();
+            Alto();
+            Inicio();
+            Fin();
+        }
+        private void Color()
+        {
+            if (CompararLexema("16"))
+            {
+                if (CompararLexema("28"))
+                {
+                    if (CompararLexema("2"))
+                    {
+
+                    }
+                    else
+                    {
+                        Error("2");
+                    }
+                }
+                else
+                {
+                    Error("28");
+                }
+            }
+            else
+            {
+                Error("16");
+            }
+        }
+        private void Alto()
+        {
+            if (CompararLexema("17"))
+            {
+                if (CompararLexema("28"))
+                {
+                    if (CompararLexema("1"))
+                    {
+
+                    }
+                    else
+                    {
+                        Error("1");
+                    }
+                }
+                else
+                {
+                    Error("28");
+                }
+            }
+            else
+            {
+                Error("17");
+            }
+        }
+        private void Inicio()
+        {
+            if (CompararLexema("18"))
+            {
+                if (CompararLexema("28"))
+                {
+                    if (CompararLexema("1"))
+                    {
+                        if (CompararLexema("26"))
+                        {
+                            if (CompararLexema("1"))
+                            {
+
+                            }
+                            else
+                            {
+                                Error("1");
+                            }
+                        }
+                        else
+                        {
+                            Error("26");
+                        }
+                    }
+                    else
+                    {
+                        Error("1");
+                    }
+                }
+                else
+                {
+                    Error("28");
+                }
+            }
+            else
+            {
+                Error("18");
+            }
+        }
+        private void Fin()
+        {
+            if (CompararLexema("19"))
+            {
+                if (CompararLexema("28"))
+                {
+                    if (CompararLexema("1"))
+                    {
+                        if (CompararLexema("26"))
+                        {
+                            if (CompararLexema("1"))
+                            {
+
+                            }
+                            else
+                            {
+                                Error("1");
+                            }
+                        }
+                        else
+                        {
+                            Error("26");
+                        }
+                    }
+                    else
+                    {
+                        Error("1");
+                    }
+                }
+                else
+                {
+                    Error("28");
+                }
+            }
+            else
+            {
+                Error("19");
+            }
+        }
+        private void OtraPared()
+        {
+            if (CompararLexema("23"))
+            {
+                Pared();
+                OtraPared();
+            }
+        }
+
+        private void Ventana_s()
+        {
+            if (CompararLexema("24"))
+            {
+                if (CompararLexema("11"))
+                {
+                    if (CompararLexema("25"))
+                    {
+                        Ventana();
+                        OtraVentana();
+                        if (CompararLexema("24"))
+                        {
+                            if (CompararLexema("29"))
+                            {
+                                if (CompararLexema("11"))
+                                {
+                                    if (CompararLexema("25"))
+                                    {
+                                        ///******************************************************************
+                                    }
+                                    else
+                                    {
+                                        Error("25");
+                                    }
+                                }
+                                else
+                                {
+                                    Error("11");
+                                }
+                            }
+                            else
+                            {
+                                Error("29");
+                            }
+                        }
+                        else
+                        {
+                            Error("24");
+                        }
+                    }
+                    else
+                    {
+                        Error("25");
+                    }
+                }
+                else
+                {
+                    Error("11");
+                }
+            }
+            else
+            {
+                Error("24");
+
+            }
+        }
+        private void Ventana()
+        {
+            Nombre();
+            Tipo();
+            Longitud();
+            Radio();
+            Pared_Asociada();
+        }
+        private void Longitud()
+        {
+            if (CompararLexema("32"))
+            {
+                if (CompararLexema("28"))
+                {
+                    if (CompararLexema("1"))
+                    {
+
+                    }
+                    else
+                    {
+                        Error("1");
+                    }
+                }
+                else
+                {
+                    Error("28");
+                }
+            }
+            else
+            {
+                Error("32");
+            }
+        }
+        private void Radio()
+        {
+            if (CompararLexema("20"))
+            {
+                if (CompararLexema("28"))
+                {
+                    if (CompararLexema("1"))
+                    {
+
+                    }
+                    else
+                    {
+                        Error("1");
+                    }
+                }
+                else
+                {
+                    Error("28");
+                }
+            }
+            else
+            {
+                Error("20");
+
+            }
+        }
+        private void Pared_Asociada()
+        {
+            if (CompararLexema("20"))
+            {
+                if (CompararLexema("28"))
+                {
+                    if (CompararLexema("2"))
+                    {
+
+                    }
+                    else
+                    {
+                        Error("2");
+                    }
+                }
+                else
+                {
+                    Error("28");
+                }
+            }
+            else
+            {
+                Error("20");
+
+            }
+        }
+        private void OtraVentana()
+        {
+            if (CompararLexema("23"))
+            {
+                Ventana();
+                OtraVentana();
+            }
+        }
+
+        private void Puerta_s()
+        {
+            if (CompararLexema("24"))
+            {
+                if (CompararLexema("12"))
+                {
+                    if (CompararLexema("25"))
+                    {
+                        Puerta();
+                        OtraPuerta();
+                        if (CompararLexema("24"))
+                        {
+                            if (CompararLexema("29"))
+                            {
+                                if (CompararLexema("12"))
+                                {
+                                    if (CompararLexema("25"))
+                                    {
+                                        ///******************************************************************
+                                    }
+                                    else
+                                    {
+                                        Error("25");
+                                    }
+                                }
+                                else
+                                {
+                                    Error("12");
+                                }
+                            }
+                            else
+                            {
+                                Error("29");
+                            }
+                        }
+                        else
+                        {
+                            Error("24");
+                        }
+                    }
+                    else
+                    {
+                        Error("25");
+                    }
+                }
+                else
+                {
+                    Error("12");
+                }
+            }
+            else
+            {
+                Error("24");
+
+            }
+        }
+        private void Puerta()
+        {
+            Nombre();
+            Alto();
+            Ancho();
+            Pared_Asociada();
+            Color();
+        }
+        private void OtraPuerta()
+        {
+            if (CompararLexema("23"))
+            {
+                Puerta();
+                OtraPuerta();
+            }
+        }
+
+        private void Suelo_s()
+        {
+            if (CompararLexema("24"))
+            {
+                if (CompararLexema("13"))
+                {
+                    if (CompararLexema("25"))
+                    {
+                        Suelo();
+                        OtroSuelo();
+                        if (CompararLexema("24"))
+                        {
+                            if (CompararLexema("29"))
+                            {
+                                if (CompararLexema("13"))
+                                {
+                                    if (CompararLexema("25"))
+                                    {
+                                        ///******************************************************************
+                                    }
+                                    else
+                                    {
+                                        Error("25");
+                                    }
+                                }
+                                else
+                                {
+                                    Error("13");
+                                }
+                            }
+                            else
+                            {
+                                Error("29");
+                            }
+                        }
+                        else
+                        {
+                            Error("24");
+                        }
+                    }
+                    else
+                    {
+                        Error("25");
+                    }
+                }
+                else
+                {
+                    Error("13");
+                }
+            }
+            else
+            {
+                Error("24");
+
+            }
+        }
+
+        private void Suelo()
+        {
+            Nombre();
+            Color();
+        }
+        private void OtroSuelo()
+        {
+            if (CompararLexema("23"))
+            {
+                Suelo();
+                OtroSuelo();
+            }
+        }
+        /// <summary>
+        /// //////////////////////////////////////////////////////////////////
+
+
         private void Error(string tokenId)
         {
-           
             Proyecto.EscribirEnConsola("Error 0: Falta '" + Proyecto.token[Convert.ToInt16(tokenId), 1] + "' " + Proyecto.token[Convert.ToInt16(tokenId), 2] + " en fila "+ lexemaActual.fila +" y columna "+ lexemaActual.columna);
             
         }

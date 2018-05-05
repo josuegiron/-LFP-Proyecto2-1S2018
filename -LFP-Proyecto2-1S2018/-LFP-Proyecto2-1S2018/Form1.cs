@@ -138,9 +138,7 @@ namespace _LFP_Proyecto2_1S2018
             selectTab.tablaDeSimbolos.Clear();
             selectTab.tablaDeErrores.Clear();
             Scaner.analizarLenguaje();
-            Parser.Inicio();
-
-
+            Parser.Design();
         }
 
         Pestania tabActual;
