@@ -8,5 +8,9 @@ namespace _LFP_Proyecto2_1S2018
 {
     class Ejecutar
     {
+        public Ejecutar()
+        {
+
+        }
     }
 }

@@ -44,7 +44,6 @@
             this.manualDeUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualTecnicoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acercaDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Contenedor = new System.Windows.Forms.TabControl();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,8 +53,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.archivoToolStripMenuItem,
             this.ejecutarToolStripMenuItem,
-            this.ayudaToolStripMenuItem,
-            this.toolStripMenuItem1});
+            this.ayudaToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1195, 24);
@@ -175,12 +173,6 @@
             this.acercaDeToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.acercaDeToolStripMenuItem.Text = "Acerca de...";
             // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(23, 20);
-            this.toolStripMenuItem1.Text = "";
-            // 
             // Contenedor
             // 
             this.Contenedor.Location = new System.Drawing.Point(12, 27);
@@ -227,7 +219,6 @@
         private System.Windows.Forms.ToolStripMenuItem manualTecnicoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem acercaDeToolStripMenuItem;
         private System.Windows.Forms.TabControl Contenedor;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
     }
 }
 
