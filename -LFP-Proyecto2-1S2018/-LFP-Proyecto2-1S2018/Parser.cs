@@ -22,6 +22,7 @@ namespace _LFP_Proyecto2_1S2018
         {
             try
             {
+                lexemaActual = Proyecto.tablaDeSimbolos[indicador];
                 if (lexemaActual.idToken == "30")
                 {
                     indicador++;
@@ -29,7 +30,6 @@ namespace _LFP_Proyecto2_1S2018
                 }
             }
             catch { }
-
         }
        private void Avanzar()
         {

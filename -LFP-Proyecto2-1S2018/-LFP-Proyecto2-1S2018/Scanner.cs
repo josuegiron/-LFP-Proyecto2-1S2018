@@ -340,7 +340,7 @@ namespace _LFP_Proyecto2_1S2018
                         }
                         break;
                     case 15:     //-----  ESTADO 15   -----
-                        validarLexema(lexema, fila, columna, "comentario");
+                        validarLexema(lexema, fila, columna, "cadena");
                         estadoActual = 0;
                         lexema = "";
                         estadoInicial--;
@@ -433,8 +433,14 @@ namespace _LFP_Proyecto2_1S2018
             }
             else if (tipo == "comentario")   //  Si viene un comentario:
             {
-                agregarLexema(Proyecto.token[2, 0], lexema, fila, columna, Proyecto.token[2, 2]);
+                agregarLexema(Proyecto.token[30, 0], lexema, fila, columna, Proyecto.token[30, 2]);
                 return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + Proyecto.token[2, 0] + "\tToken: " + Proyecto.token[2, 2];
+
+            }
+            else if (tipo == "cadena")   //  Si viene una cadena:
+            {
+                agregarLexema(Proyecto.token[31, 0], lexema, fila, columna, Proyecto.token[31, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + Proyecto.token[31, 0] + "\tToken: " + Proyecto.token[31, 2];
 
             }
             return "ERROR INESPERADO...";
