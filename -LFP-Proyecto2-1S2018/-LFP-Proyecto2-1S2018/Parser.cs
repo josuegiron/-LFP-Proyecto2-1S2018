@@ -197,7 +197,7 @@ namespace _LFP_Proyecto2_1S2018
                     }
                     else
                     {
-                        Error("6");
+                        Error("2");
                     }
                 }
                 else
@@ -207,7 +207,7 @@ namespace _LFP_Proyecto2_1S2018
             }
             else
             {
-                Error("2");
+                Error("6");
             }
         }
 
@@ -305,7 +305,7 @@ namespace _LFP_Proyecto2_1S2018
                         Pared_s();
                         Ventana_s();
                         Puerta_s();
-                        Suelo();
+                        Suelo_s();
                         if (CompararLexema("24"))
                         {
                             if (CompararLexema("29"))
@@ -412,7 +412,7 @@ namespace _LFP_Proyecto2_1S2018
         {
             if (CompararLexema("14"))
             {
-                if (CompararLexema("27"))
+                if (CompararLexema("27") || CompararLexema("28"))
                 {
                     if (CompararLexema("1"))
                     {
@@ -720,64 +720,61 @@ namespace _LFP_Proyecto2_1S2018
         {
             Nombre();
             Tipo();
-            Longitud();
-            Radio();
+            Avanzar();
+            switch (lexemaActual.idToken)
+            {
+                case "20":
+                    Radio();
+                    break;
+                case "32":
+                    Longitud();
+                    break;
+                default:
+                    Proyecto.EscribirEnConsola("Error, se esperaba Radio o longitud");
+                    break;
+            }
             Pared_Asociada();
         }
         private void Longitud()
         {
-            if (CompararLexema("32"))
+            if (CompararLexema("28"))
             {
-                if (CompararLexema("28"))
+                if (CompararLexema("1"))
                 {
-                    if (CompararLexema("1"))
-                    {
 
-                    }
-                    else
-                    {
-                        Error("1");
-                    }
                 }
                 else
                 {
-                    Error("28");
+                    Error("1");
                 }
             }
             else
             {
-                Error("32");
+                Error("28");
             }
         }
         private void Radio()
         {
-            if (CompararLexema("20"))
+           if (CompararLexema("27"))
             {
-                if (CompararLexema("28"))
+                if (CompararLexema("1"))
                 {
-                    if (CompararLexema("1"))
-                    {
 
-                    }
-                    else
-                    {
-                        Error("1");
-                    }
                 }
                 else
                 {
-                    Error("28");
+                    Error("1");
                 }
             }
             else
             {
-                Error("20");
-
+                Error("28");
             }
+            
         }
         private void Pared_Asociada()
         {
-            if (CompararLexema("20"))
+            if (CompararLexema("21"))
             {
                 if (CompararLexema("28"))
                 {
@@ -797,7 +794,7 @@ namespace _LFP_Proyecto2_1S2018
             }
             else
             {
-                Error("20");
+                Error("21");
 
             }
         }
