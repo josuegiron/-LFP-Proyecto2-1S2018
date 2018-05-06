@@ -92,11 +92,12 @@ namespace _LFP_Proyecto2_1S2018
 
         public List<Lexema> tablaDeSimbolos = new List<Lexema>();
         public List<Error> tablaDeErrores = new List<Error>();
-        public List<Variable> valorVariable = new List<Variable>();
+        public List<Variable> variables = new List<Variable>();
 
         public Pestania(TabControl Control)
         {
             InitializeComponent(Control);
+            
         }
         private void InitializeComponent(TabControl Control)
         {
@@ -179,7 +180,47 @@ namespace _LFP_Proyecto2_1S2018
 
 
         }
+        int num = 0;
+        public void agregarVariable(string nombre, string tipo, string valor)
+        {
+            Variable var = variables.Find(x => x.nombre.Contains(nombre));
+            if (var == null)
+            {
 
+                variables.Add(new Variable() { id = num, nombre = nombre, tipo = tipo, valor = valor });
+            }
+            else
+            {
+                var.valor = valor;
+            }
+
+            num++;
+
+        }
+
+        private string obrenerVariable(string nombre)
+        {
+            Variable var = variables.Find(x => x.nombre.Contains(nombre));
+            if (var == null)
+            {
+                return nombre;
+            }
+            else
+            {
+                return Convert.ToString(var.valor);
+            }
+
+        }
+
+        public double evaluarExpresion(string expresion)
+        {
+            Evaluador1 evaluador = new Evaluador1();
+            evaluador.evaluarExpresion(expresion);
+            double resultado = evaluador.F();
+            
+            EscribirEnConsola("Evaluando: " + expresion +" = "+ resultado);
+            return resultado;
+        }
         public void EscribirEnConsola(string texto)
         {
             Consola.Text += texto + "\r\n DESIGN# ";

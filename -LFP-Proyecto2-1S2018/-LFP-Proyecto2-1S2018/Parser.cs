@@ -181,11 +181,12 @@ namespace _LFP_Proyecto2_1S2018
         }
         private void Variable()
         {
-            Nombre();
-            Tipo();
-            Valor();
+            string nombre = Nombre();
+            string tipo = Tipo();
+            string valor = Valor();
+            Proyecto.agregarVariable(nombre, tipo, valor);
         }
-        private void Nombre()
+        private string Nombre()
         {
             if (CompararLexema("6"))
             {
@@ -193,7 +194,7 @@ namespace _LFP_Proyecto2_1S2018
                 {
                     if (CompararLexema("2"))
                     {
-
+                        return lexemaActual.nombre;
                     }
                     else
                     {
@@ -203,15 +204,16 @@ namespace _LFP_Proyecto2_1S2018
                 else
                 {
                     Error("28");
+                   
                 }
             }
             else
             {
                 Error("6");
             }
+            return null;
         }
-
-        private void Tipo()
+        private string Tipo()
         {
             if (CompararLexema("7"))
             {
@@ -219,7 +221,7 @@ namespace _LFP_Proyecto2_1S2018
                 {
                     if (CompararLexema("2"))
                     {
-
+                        return lexemaActual.nombre;
                     }
                     else
                     {
@@ -235,8 +237,9 @@ namespace _LFP_Proyecto2_1S2018
             {
                 Error("7");
             }
+            return null;
         }
-        private void Valor()
+        private string Valor()
         {
             if (CompararLexema("8"))
             {
@@ -246,13 +249,11 @@ namespace _LFP_Proyecto2_1S2018
                     switch (lexemaActual.idToken)
                     {
                         case "1":
-                            Expresion();
-                            break;
+                            return Expresion();
                         case "2":
-                            break;
+                            return lexemaActual.nombre;
                         case "31":
-                            Proyecto.EscribirEnConsola("pasa");
-                            break;
+                            return lexemaActual.nombre;
                         default:
                             Proyecto.EscribirEnConsola("Error, no se reconoce lo que viene");
                             break;
@@ -267,16 +268,28 @@ namespace _LFP_Proyecto2_1S2018
             {
                 Error("8");
             }
+            return null;
         }
-       
 
-        private void Expresion()
+        string expresion;
+        private string Expresion()
+        {
+            expresion = "";
+            expresion += lexemaActual.nombre;
+            Expresion2();
+            //expresion = expresion.Replace(".", ",");
+
+            return Convert.ToString(Proyecto.evaluarExpresion(expresion));
+        }
+        private void Expresion2()
         {
             if (CompararLexema("22") || CompararLexema("29"))
             {
+                expresion += lexemaActual.nombre;
                 if (CompararLexema("1"))
                 {
-                    Expresion();
+                    expresion += lexemaActual.nombre;
+                    Expresion2();
                 }
                 else
                 {

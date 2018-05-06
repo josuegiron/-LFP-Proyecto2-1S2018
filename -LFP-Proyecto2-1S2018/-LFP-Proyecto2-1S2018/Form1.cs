@@ -137,6 +137,7 @@ namespace _LFP_Proyecto2_1S2018
             Parser Parser = new Parser(selectTab);
             selectTab.tablaDeSimbolos.Clear();
             selectTab.tablaDeErrores.Clear();
+            selectTab.variables.Clear();
             Scaner.analizarLenguaje();
             Parser.Design();
         }

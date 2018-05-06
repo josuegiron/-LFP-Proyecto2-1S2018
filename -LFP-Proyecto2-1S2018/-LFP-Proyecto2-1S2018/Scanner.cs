@@ -373,36 +373,7 @@ namespace _LFP_Proyecto2_1S2018
             numError++;
         }
 
-        private void agregarVariable(string nombre, int valor)
-        {
-            Variable var = Proyecto.valorVariable.Find(x => x.nombre.Contains(nombre));
-            if (var == null)
-            {
-
-                Proyecto.valorVariable.Add(new Variable() { id = num, nombre = nombre, valor = valor });
-            }
-            else
-            {
-                var.valor = valor;
-            }
-
-            num++;
-
-        }
-
-        private string obrenerVariable(string nombre)
-        {
-            Variable var = Proyecto.valorVariable.Find(x => x.nombre.Contains(nombre));
-            if (var == null)
-            {
-                return nombre;
-            }
-            else
-            {
-                return Convert.ToString(var.valor);
-            }
-
-        }
+       
 
         private string validarLexema(string lexema, int fila, int columna, string tipo)
         {
