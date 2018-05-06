@@ -198,7 +198,7 @@ namespace _LFP_Proyecto2_1S2018
 
         }
 
-        private string obrenerVariable(string nombre)
+        public string obrenerValorVariable(string nombre)
         {
             Variable var = variables.Find(x => x.nombre.Contains(nombre));
             if (var == null)
@@ -207,7 +207,7 @@ namespace _LFP_Proyecto2_1S2018
             }
             else
             {
-                return Convert.ToString(var.valor);
+                return var.valor;
             }
 
         }

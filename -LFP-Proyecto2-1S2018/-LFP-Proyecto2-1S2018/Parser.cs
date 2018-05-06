@@ -181,11 +181,33 @@ namespace _LFP_Proyecto2_1S2018
         }
         private void Variable()
         {
+            double doble;
+            int entero;
             string nombre = Nombre();
             string tipo = Tipo();
-            string valor = Valor();
-            Proyecto.agregarVariable(nombre, tipo, valor);
+            string valor = Valor(tipo);
+            
+            //  ANALISIS SEMANTICO
+
+            if (tipo == "doble" && !(Double.TryParse(valor, out doble)))
+            {
+                Proyecto.EscribirEnConsola("ERROR SEMANTICO: El valor de la variable "+ nombre + " no es doble");
+            }
+            else if (tipo == "entero" && !(int.TryParse(valor, out entero)))
+            {
+                Proyecto.EscribirEnConsola("ERROR SEMANTICO: El valor de la variable " + nombre + " no es entera");
+            }
+            else if ((tipo == "cadena" && int.TryParse(valor, out entero)) || (tipo == "cadena" && Double.TryParse(valor, out doble)))
+            {
+                Proyecto.EscribirEnConsola("ERROR SEMANTICO: El valor de la variable " + nombre + " no es una cadena");
+            }
+            else
+            {
+                Proyecto.agregarVariable(nombre, tipo, valor);
+            }
+           
         }
+
         private string Nombre()
         {
             if (CompararLexema("6"))
@@ -239,7 +261,7 @@ namespace _LFP_Proyecto2_1S2018
             }
             return null;
         }
-        private string Valor()
+        private string Valor(string tipo)
         {
             if (CompararLexema("8"))
             {
@@ -251,11 +273,11 @@ namespace _LFP_Proyecto2_1S2018
                         case "1":
                             return Expresion();
                         case "2":
-                            return lexemaActual.nombre;
+                            return Proyecto.obrenerValorVariable(lexemaActual.idToken);
                         case "31":
                             return lexemaActual.nombre;
                         default:
-                            Proyecto.EscribirEnConsola("Error, no se reconoce lo que viene");
+                            Proyecto.EscribirEnConsola("Error, no se reconoce la entrada");
                             break;
                     }
                 }
