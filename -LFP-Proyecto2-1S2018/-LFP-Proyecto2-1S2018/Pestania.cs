@@ -12,7 +12,79 @@ namespace _LFP_Proyecto2_1S2018
     public class Pestania : TabPage
     {
 
+
+        public string[,] token = new string[,] {
+                { "ID", "Token", "Descripcion" },
+                { "1", "Numero", "Secuencia de numeros" },
+                { "2", "id", "Cadena de numeros y letras" },
+                { "3", "diseño", "Palabra reservada, inicio de programa" },
+                { "4", "variables", "Palabra reservda, indica seccion de variables" },
+                { "5", "construccion", "Palabra reservada, indica seccion de construccion" },
+                { "6", "nombre", "Palabra reservada" },
+                { "7", "tipo", "Palabra reservada" },
+                { "8", "valor", "Palabra reservada" },
+                { "9", "terreno", "Palabra reservada" },
+                { "10", "pared", "Palabra reservada" },
+                { "11", "ventana", "Palabra reservada" },
+                { "12", "puerta", "Palabra reservada" },
+                { "13", "suelo", "Palabra reservada" },
+                { "14", "ancho", "Palabra reservada" },
+                { "15", "largo", "Palabra reservada" },
+                { "16", "color", "Palabra reservada" },
+                { "17", "alto", "Palabra reservada" },
+                { "18", "inicio", "Palabra reservada"},
+                { "19", "fin", "Palabra reservada"},
+                { "20", "radio", "Palabra reservada"},
+                { "21", "pared_asociada", "Palabra reservada"},
+                { "22", "Operador", "Operador matematico"},
+                { "23", ";", "Final de comando"},
+                { "24", "<", "Signo menor"},
+                { "25", ">", "Signo mayor"},
+                { "26", ",", "Coma"},
+                { "27", "=", "Signo igual, asignacion"},
+                { "28", ":", "Dos puntos"},
+                { "29", "/", "Operador de division o indicador de cierre de estiqueta..."},
+                { "30", "Comentario", "Comentarios"},
+                { "31", "Cadena", "Cadena"},
+                { "32", "Longitud", "Palabra reservada"}
+            };
+
+        public string[,] palabrasReservadas = new string[,] {
+                { "3", "diseño" },
+                { "4", "variables" },
+                { "5", "construccion" },
+                { "6", "nombre" },
+                { "7", "tipo" },
+                { "8", "valor" },
+                { "9", "terreno" },
+                { "10", "pared" },
+                { "11", "ventana" },
+                { "12", "puerta" },
+                { "13", "suelo" },
+                { "14", "ancho" },
+                { "15", "largo" },
+                { "16", "color" },
+                { "17", "alto" },
+                { "18", "inicio"},
+                { "19", "fin"},
+                { "20", "radio"},
+                { "21", "pared_asociada"},
+                { "22", "+"},{ "22", "-"},{ "22", "*"},{ "22", "^"},
+                { "23", ";"},
+                { "24", "<"},
+                { "25", ">"},
+                { "26", ","},
+                { "27", "="},
+                { "28", ":"},
+                { "29", "/"},
+                { "32", "longitud"}
+            };
+
+
+
+
         public System.Windows.Forms.RichTextBox Entrada;
+        public System.Windows.Forms.RichTextBox Consola;
         public System.Windows.Forms.TabControl Control;
         public string rutaArchivo = null;
         string rutaTablaDeSimbolos = " ";
@@ -20,11 +92,12 @@ namespace _LFP_Proyecto2_1S2018
 
         public List<Lexema> tablaDeSimbolos = new List<Lexema>();
         public List<Error> tablaDeErrores = new List<Error>();
-        public List<Variable> valorVariable = new List<Variable>();
+        public List<Variable> variables = new List<Variable>();
 
         public Pestania(TabControl Control)
         {
             InitializeComponent(Control);
+            
         }
         private void InitializeComponent(TabControl Control)
         {
@@ -32,10 +105,30 @@ namespace _LFP_Proyecto2_1S2018
 
             this.Entrada.Location = new System.Drawing.Point(6, 20);
             this.Entrada.Name = "Entrada";
-            this.Entrada.Size = new System.Drawing.Size(350, 600);
+            this.Entrada.Size = new System.Drawing.Size(350, 450);
             this.Entrada.TabIndex = 0;
             this.Entrada.Text = "";
 
+
+            this.Consola = new System.Windows.Forms.RichTextBox();
+
+            
+           
+            
+            this.Consola.TabIndex = 0;
+
+            this.Consola.BackColor = System.Drawing.SystemColors.MenuText;
+            this.Consola.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Consola.ForeColor = System.Drawing.Color.White;
+            this.Consola.Location = new System.Drawing.Point(6, 490);
+            this.Consola.Margin = new System.Windows.Forms.Padding(5);
+            this.Consola.Multiline = true;
+            this.Consola.Name = "Consola";
+            this.Consola.Size = new System.Drawing.Size(350, 130);
+            this.Consola.TabIndex = 0;
+            this.Consola.TabStop = false;
+            this.Consola.Text = " DESIGN# ";
+            this.Controls.Add(this.Consola);
             this.Controls.Add(this.Entrada);
             // 
         }
@@ -87,8 +180,56 @@ namespace _LFP_Proyecto2_1S2018
 
 
         }
+        int num = 0;
+        public void agregarVariable(string nombre, string tipo, string valor)
+        {
+            Variable var = variables.Find(x => x.nombre.Contains(nombre));
+            if (var == null)
+            {
 
+                variables.Add(new Variable() { id = num, nombre = nombre, tipo = tipo, valor = valor });
+            }
+            else
+            {
+                var.valor = valor;
+            }
 
+            num++;
+
+        }
+
+        public string obrenerValorVariable(string nombre)
+        {
+            Variable var = variables.Find(x => x.nombre.Contains(nombre));
+            if (var == null)
+            {
+                return nombre;
+            }
+            else
+            {
+                return var.valor;
+            }
+
+        }
+
+        public double evaluarExpresion(string expresion)
+        {
+            Evaluador1 evaluador = new Evaluador1();
+            evaluador.evaluarExpresion(expresion);
+            double resultado = evaluador.F();
+            
+            EscribirEnConsola("Evaluando: " + expresion +" = "+ resultado);
+            return resultado;
+        }
+        public void EscribirEnConsola(string texto)
+        {
+            Consola.Text += texto + "\r\n DESIGN# ";
+
+            Consola.SelectionStart = Consola.Text.Length;
+            Consola.Focus();
+            Consola.ScrollToCaret();
+            Consola.ReadOnly = true;
+        }
         private void Lineas_Click(object sender, EventArgs e)
         {
 

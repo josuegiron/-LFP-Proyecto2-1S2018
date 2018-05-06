@@ -171,7 +171,7 @@ namespace _LFP_Proyecto2_1S2018
                             estadoActual = 3;
                             lexema += caracterActual;
                         }
-                        else if (comparar(G, caracterActualStr))
+                        else if (comparar(GB, caracterActualStr))
                         {
                             estadoActual = 3;
                             lexema += caracterActual;
@@ -216,7 +216,7 @@ namespace _LFP_Proyecto2_1S2018
                             lexema += caracterActual;
                             estadoActual = 3;
                         }
-                        else if (comparar(G, caracterActualStr))
+                        else if (comparar(GB, caracterActualStr))
                         {
                             lexema += caracterActual;
                             estadoActual = 3;
@@ -340,7 +340,7 @@ namespace _LFP_Proyecto2_1S2018
                         }
                         break;
                     case 15:     //-----  ESTADO 15   -----
-                        validarLexema(lexema, fila, columna, "comentario");
+                        validarLexema(lexema, fila, columna, "cadena");
                         estadoActual = 0;
                         lexema = "";
                         estadoInicial--;
@@ -358,68 +358,7 @@ namespace _LFP_Proyecto2_1S2018
         }
 
 
-        string[,] token = new string[,] {
-                { "ID", "Token", "Descripcion" },
-                { "1", "Numero", "Secuencia de numeros" },
-                { "2", "id", "Cadena de numeros y letras" },
-                { "3", "diseño", "Palabra reservada, inicio de programa" },
-                { "4", "variables", "Palabra reservda, indica seccion de variables" },
-                { "5", "construccion", "Palabra reservada, indica seccion de construccion" },
-                { "6", "nombre", "Palabra reservada" },
-                { "7", "tipo", "Palabra reservada" },
-                { "8", "valor", "Palabra reservada" },
-                { "9", "terreno", "Palabra reservada" },
-                { "10", "pared", "Palabra reservada" },
-                { "11", "ventana", "Palabra reservada" },
-                { "12", "puerta", "Palabra reservada" },
-                { "13", "suelo", "Palabra reservada" },
-                { "14", "ancho", "Palabra reservada" },
-                { "15", "largo", "Palabra reservada" },
-                { "16", "color", "Palabra reservada" },
-                { "17", "alto", "Palabra reservada" },
-                { "18", "inicio", "Palabra reservada"},
-                { "19", "fin", "Palabra reservada"},
-                { "20", "radio", "Palabra reservada"},
-                { "21", "pared_asociada", "Palabra reservada"},
-                { "22", "Operador", "Operador matematico"},
-                { "23", ";", "Final de comando"},
-                { "24", "<", "Signo menor"},
-                { "25", ">", "Signo mayor"},
-                { "26", ",", "Coma"},
-                { "27", "=", "Signo igual, asignacion"},
-                { "27", ":", "Dos puntos"}
-            };
-
-        string[,] palabrasReservadas = new string[,] {
-                { "3", "diseño" },
-                { "4", "variables" },
-                { "5", "construccion" },
-                { "6", "nombre" },
-                { "7", "tipo" },
-                { "8", "valor" },
-                { "9", "terreno" },
-                { "10", "pared" },
-                { "11", "ventana" },
-                { "12", "puerta" },
-                { "13", "suelo" },
-                { "14", "ancho" },
-                { "15", "largo" },
-                { "16", "color" },
-                { "17", "alto" },
-                { "18", "inicio"},
-                { "19", "fin"},
-                { "20", "radio"},
-                { "21", "pared_asociada"},
-                { "22", "Operador"},
-                { "23", ";"},
-                { "24", "<"},
-                { "25", ">"},
-                { "26", ","},
-                { "27", "="},
-                { "27", ":"}
-            };
-
-
+        
         int num = 1;
         int numError = 1;
 
@@ -434,36 +373,7 @@ namespace _LFP_Proyecto2_1S2018
             numError++;
         }
 
-        private void agregarVariable(string nombre, int valor)
-        {
-            Variable var = Proyecto.valorVariable.Find(x => x.nombre.Contains(nombre));
-            if (var == null)
-            {
-
-                Proyecto.valorVariable.Add(new Variable() { id = num, nombre = nombre, valor = valor });
-            }
-            else
-            {
-                var.valor = valor;
-            }
-
-            num++;
-
-        }
-
-        private string obrenerVariable(string nombre)
-        {
-            Variable var = Proyecto.valorVariable.Find(x => x.nombre.Contains(nombre));
-            if (var == null)
-            {
-                return nombre;
-            }
-            else
-            {
-                return Convert.ToString(var.valor);
-            }
-
-        }
+       
 
         private string validarLexema(string lexema, int fila, int columna, string tipo)
         {
@@ -471,31 +381,37 @@ namespace _LFP_Proyecto2_1S2018
             if (tipo == "numero")   //  Si viene un numero:
             {
                 lexema = lexema.Replace(" ", "");
-                agregarLexema(token[1, 0], lexema, fila, columna, token[1, 2]);
-                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[1, 0] + "\tToken: " + token[1, 2];
+                agregarLexema(Proyecto.token[1, 0], lexema, fila, columna, Proyecto.token[1, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + Proyecto.token[1, 0] + "\tToken: " + Proyecto.token[1, 2];
 
             }
             else if (tipo == "reservado")   //   Si vienen ID o simbolos:
             {
                 lexema = lexema.Replace(" ", "");
-                for (int i = 0; i < palabrasReservadas.GetLength(0); i++)
+                for (int i = 0; i < Proyecto.palabrasReservadas.GetLength(0); i++)
                 {
-                    if (lexema == palabrasReservadas[i, 1])
+                    if (lexema == Proyecto.palabrasReservadas[i, 1])
                     {
-                        int id = Int32.Parse(palabrasReservadas[i, 0]);
-                        agregarLexema(token[id, 0], lexema, fila, columna, token[id, 2]);
-                        return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[id, 0] + "\tToken: " + token[id, 2];
+                        int id = Int32.Parse(Proyecto.palabrasReservadas[i, 0]);
+                        agregarLexema(Proyecto.token[id, 0], lexema, fila, columna, Proyecto.token[id, 2]);
+                        return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + Proyecto.token[id, 0] + "\tToken: " + Proyecto.token[id, 2];
 
                     }
                 }
-                agregarLexema(token[2, 0], lexema, fila, columna, token[2, 2]);
-                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[2, 0] + "\tToken: " + token[2, 2];
+                agregarLexema(Proyecto.token[2, 0], lexema, fila, columna, Proyecto.token[2, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + Proyecto.token[2, 0] + "\tToken: " + Proyecto.token[2, 2];
 
             }
             else if (tipo == "comentario")   //  Si viene un comentario:
             {
-                agregarLexema(token[2, 0], lexema, fila, columna, token[2, 2]);
-                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + token[2, 0] + "\tToken: " + token[2, 2];
+                agregarLexema(Proyecto.token[30, 0], lexema, fila, columna, Proyecto.token[30, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + Proyecto.token[2, 0] + "\tToken: " + Proyecto.token[2, 2];
+
+            }
+            else if (tipo == "cadena")   //  Si viene una cadena:
+            {
+                agregarLexema(Proyecto.token[31, 0], lexema, fila, columna, Proyecto.token[31, 2]);
+                return "+ TOKEN: " + lexema + "\t(Fila: " + fila + ", Col: " + columna + ")" + "\tId Token: " + Proyecto.token[31, 0] + "\tToken: " + Proyecto.token[31, 2];
 
             }
             return "ERROR INESPERADO...";

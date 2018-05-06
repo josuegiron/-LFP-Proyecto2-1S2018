@@ -10,6 +10,7 @@ namespace _LFP_Proyecto2_1S2018
     {
         public int id { get; set; }
         public string nombre { get; set; }
-        public int valor { get; set; }
+        public string tipo { get; set; }
+        public string valor { get; set; }
     }
 }
