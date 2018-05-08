@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -160,6 +161,24 @@ namespace _LFP_Proyecto2_1S2018
         {
             tabActual = Contenedor.SelectedTab as Pestania;
             tabActual.generarTablaDeSimbolos();
+        }
+
+        private void acercaDeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string info = "Autor: Josué Benjamín Girón Ramírez\nCarné: 201318631\r\n\nUniversidad San Carlos de Guatemala\r\n\nPrimer semestre del año 2018\nCurso: LENGUAJES FORMALES Y DE PROGRAMACION\nCódigo: 796 \nSección: A-\r\n\nCopyright © Todos los Derechos Reservados.";
+            MessageBox.Show(info);
+        }
+
+        private void manualDeUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pdfPath = Path.Combine(Application.StartupPath, "Documentos\\Manual de usuario.pdf");
+            Process.Start(pdfPath);
+        }
+
+        private void manualTecnicoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string pdfPath = Path.Combine(Application.StartupPath, "Documentos\\Manual tecnico.pdf");
+            Process.Start(pdfPath);
         }
     }
 

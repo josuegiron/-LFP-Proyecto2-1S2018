@@ -273,7 +273,7 @@ namespace _LFP_Proyecto2_1S2018
                         case "1":
                             return Expresion();
                         case "2":
-                            return Proyecto.obrenerValorVariable(lexemaActual.idToken);
+                            return Proyecto.obrenerValorVariable(lexemaActual.nombre);
                         case "31":
                             return lexemaActual.nombre;
                         default:
@@ -299,8 +299,6 @@ namespace _LFP_Proyecto2_1S2018
             expresion = "";
             expresion += lexemaActual.nombre;
             Expresion2();
-            //expresion = expresion.Replace(".", ",");
-
             return Convert.ToString(Proyecto.evaluarExpresion(expresion));
         }
         private void Expresion2()

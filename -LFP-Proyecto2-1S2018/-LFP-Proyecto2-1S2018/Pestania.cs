@@ -203,6 +203,8 @@ namespace _LFP_Proyecto2_1S2018
             Variable var = variables.Find(x => x.nombre.Contains(nombre));
             if (var == null)
             {
+                EscribirEnConsola("Error: Variable '" + nombre + "' no declarada");
+
                 return nombre;
             }
             else
@@ -218,7 +220,6 @@ namespace _LFP_Proyecto2_1S2018
             evaluador.evaluarExpresion(expresion);
             double resultado = evaluador.F();
             
-            EscribirEnConsola("Evaluando: " + expresion +" = "+ resultado);
             return resultado;
         }
         public void EscribirEnConsola(string texto)
