@@ -37,7 +37,7 @@ namespace _LFP_Proyecto2_1S2018
         private void scanner(string cadena)
         {
             num = 1;
-            numError = 0;
+            Proyecto.numError = 1;
             int estadoInicial = 0;
             int estadoActual = 0;
             char caracterActual;
@@ -347,7 +347,7 @@ namespace _LFP_Proyecto2_1S2018
                         colActual--;
                         break;
                     default:
-                        agregarError(lexema, fila, columna);
+                        Proyecto.agregarError("ERROR LEXICO: No se reconoce como parte del lenguaje a '"+lexema+"'", fila, columna);
                         estadoInicial--;
                         estadoActual = 0;
                         lexema = "";
@@ -360,18 +360,14 @@ namespace _LFP_Proyecto2_1S2018
 
         
         int num = 1;
-        int numError = 1;
+        
 
         private void agregarLexema(string idToken, string lexema, int fila, int columna, string token)
         {
             Proyecto.tablaDeSimbolos.Add(new Lexema() { id = num, idToken = idToken, nombre = lexema, fila = fila, columna = columna, token = token });
             num++;
         }
-        private void agregarError(string caracter, int fila, int columna)
-        {
-            Proyecto.tablaDeErrores.Add(new Error() { id = numError, caracter = caracter, fila = fila, columna = columna });
-            numError++;
-        }
+        
 
        
 

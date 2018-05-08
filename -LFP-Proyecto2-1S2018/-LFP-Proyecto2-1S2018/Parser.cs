@@ -192,14 +192,17 @@ namespace _LFP_Proyecto2_1S2018
             if (tipo == "doble" && !(Double.TryParse(valor, out doble)))
             {
                 Proyecto.EscribirEnConsola("ERROR SEMANTICO: El valor de la variable "+ nombre + " no es doble");
+                Proyecto.agregarError("ERROR SEMANTICO: El valor de la variable " + nombre + " no es doble", lexemaActual.fila, lexemaActual.columna);
             }
             else if (tipo == "entero" && !(int.TryParse(valor, out entero)))
             {
                 Proyecto.EscribirEnConsola("ERROR SEMANTICO: El valor de la variable " + nombre + " no es entera");
+                Proyecto.agregarError("ERROR SEMANTICO: El valor de la variable " + nombre + " no es entera", lexemaActual.fila, lexemaActual.columna);
             }
             else if ((tipo == "cadena" && int.TryParse(valor, out entero)) || (tipo == "cadena" && Double.TryParse(valor, out doble)))
             {
                 Proyecto.EscribirEnConsola("ERROR SEMANTICO: El valor de la variable " + nombre + " no es una cadena");
+                Proyecto.agregarError("ERROR SEMANTICO: El valor de la variable " + nombre + " no es una cadena", lexemaActual.fila, lexemaActual.columna);
             }
             else
             {
@@ -278,6 +281,7 @@ namespace _LFP_Proyecto2_1S2018
                             return lexemaActual.nombre;
                         default:
                             Proyecto.EscribirEnConsola("Error, no se reconoce la entrada");
+                            Proyecto.agregarError("Error Sintactico: " + lexemaActual.nombre, lexemaActual.fila, lexemaActual.columna);
                             break;
                     }
                 }
@@ -990,7 +994,7 @@ namespace _LFP_Proyecto2_1S2018
         private void Error(string tokenId)
         {
             Proyecto.EscribirEnConsola("Error 0: Falta '" + Proyecto.token[Convert.ToInt16(tokenId), 1] + "' " + Proyecto.token[Convert.ToInt16(tokenId), 2] + " en fila "+ lexemaActual.fila +" y columna "+ lexemaActual.columna);
-            
+            Proyecto.agregarError("ERROR SINTACTICO. Se esperaba: " + Proyecto.token[Convert.ToInt16(tokenId), 1], lexemaActual.fila, lexemaActual.columna);
         }
 
     }

@@ -134,6 +134,7 @@ namespace _LFP_Proyecto2_1S2018
 
         public void Compilar(Pestania selectTab)
         {
+            selectTab.EscribirEnConsola("Analizando...\n|========== 100% ===========|");
             Scanner Scaner = new Scanner(selectTab);
             Parser Parser = new Parser(selectTab);
             selectTab.tablaDeSimbolos.Clear();

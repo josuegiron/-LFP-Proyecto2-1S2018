@@ -180,6 +180,12 @@ namespace _LFP_Proyecto2_1S2018
 
 
         }
+        public int numError = 1;
+        public void agregarError(string caracter, int fila, int columna)
+        {
+            tablaDeErrores.Add(new Error() { id = numError, caracter = caracter, fila = fila, columna = columna });
+            numError++;
+        }
         int num = 0;
         public void agregarVariable(string nombre, string tipo, string valor)
         {
